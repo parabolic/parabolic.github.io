@@ -47,3 +47,13 @@ theme: minima
 plugins:
  - jekyll-feed
  - jekyll-seo-tag
+
+exclude:
+  - CNAME
+  - docker-compose.yml
+  - docker_env
+  - docker_logo.png
+  - Dockerfile
+  - jekyll_logo.png
+  - README.md
+  - Gemfile*

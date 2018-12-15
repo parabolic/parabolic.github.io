@@ -1,7 +1,8 @@
 FROM ruby:2.5.3-alpine3.8
 
-LABEL maintainer="https://github.com/parabolic"
+LABEL maintainer.url="https://github.com/parabolic"
 LABEL description="A dockerized jekyll that has live updates"
+LABEL maintainer.name="Nikola Velkovski"
 
 # Remove the defaults so that they need to be set
 ARG UID

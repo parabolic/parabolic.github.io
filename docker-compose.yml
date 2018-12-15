@@ -14,6 +14,5 @@ services:
       - JEKYLL_ENV=docker
 
     command: jekyll serve --host 0.0.0.0 --port 5000 --watch
-    # command: ping 127.0.0.1
     ports:
       - 5000:5000

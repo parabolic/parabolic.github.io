@@ -7,7 +7,6 @@ services:
       args:
         - UID=${UID}
         - GID=${GID}
-        - USERNAME=${USERNAME}
     volumes:
       - .:/app
     environment:

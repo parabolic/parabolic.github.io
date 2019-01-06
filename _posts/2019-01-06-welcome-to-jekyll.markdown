@@ -17,40 +17,35 @@ tags: docker volumes pattern
 
 ### Containers and data persistence
 
-In this blog post we will be exploring the possibilities to manage, persist and share data with the host that is running the containers by utilizing a simple pattern dubbed "host based persistence".
+In this blog post we will be exploring the possibilities to manage, persist and share data between a host and a container by utilizing a simple pattern dubbed "host based persistence".
 
 Before I start diving into technicalities I reckon it is better to clarify a few things so that readers from all levels are on par with what I will be explaining.
 
 <br/>
-
 The following excerpt is taken from the docker documentation:
-
-<br/>
 
 > By default all files created inside a container are stored on a writable container layer.
 
 <br/>
-
 But what does this actually mean? Taking into account that the docker layers reside on the host system under /var/lib/docker/{storage-driver-name}, where storage-driver-name can be any of the supported [storage drivers] for docker, it actually means that all the data that gets copied or written inside the container will not persist. At least not in the way we expect it to. Furthermore, the fact that it is stored somewhere on the host system makes it even harder to manage or migrate.
-This behavior somewhat explains why we should not run applications (unless we absolutely know what we are doing) that have a state, particularly in a production environment on docker. But that does not stop us doing so in a testing environment, let's say like a local dev setup.
+This behavior somewhat explains why we should not run applications that have a state on a production environment on docker unless we absolutely know what we are doing. But that does not stop us in doing so on a testing environment, let's say like a local dev setup.
 
-Read on to see how I have implement this in docker.
+Read on to see how I have implement this pattern this in docker.
 
 <br/>
-
 **Question time!**
 
 <br/>
 **Q:** When a file gets created by the process that runs inside the container, which UID and GID will it get assigned?
 
-**A:** It will have the UID and GID of the user that is set with the `USER` instruction in the Dockerfile or 0 which is root if the `USER` instruction is not specified.
+**A:** It will have the UID and GID of the user that is set with the `USER` instruction in the Dockerfile or 0 (the root user) if the `USER` instruction is not specified.
 
 <br/>
 
-### Pickle
-As you might have noticed by now this blog platform runs with Jekyll on GitHub. Because Jekyll is a gem and behaves like an ordinary ruby application it is the perfect candidate for running it in a container. I will not bore you with all the details, but if I have piqued your interest you can have a look at the repository for more information [https://github.com/parabolic/parabolic.github.io].
+### Obstacle
+As you might have noticed by now this blog platform runs with Jekyll on GitHub. Because Jekyll is a gem and behaves like an ordinary ruby application it is the perfect candidate for running it in a container. I will not bore you with all the details, but if I have piqued your interest you can have a look at the repository for the complete setup [https://github.com/parabolic/parabolic.github.io].
 
-Let us assume that we already have our nice little blog dockerized and in order to see it how it looks like, we need to run it before sending it on it's merry journey to the GitHub cloud. Jekyll has a nice feature that regenerates the site when files are modified. The argument in question is `--watch`. That is very pleasant and helpful but with a simple docker setup where we copy the needed files on build time inside the container, anything that we change on the host after the container is started is not going to be updated to the container layer that we wrote the data to, consequently rendering the Jekyll's regeneration feature rather useless.
+Let us assume that we already have our nice little blog dockerized and in order to see how it looks like, we need to have a look at it before sending it on it's merry journey to the GitHub cloud. Jekyll has a nice feature that regenerates the site when files are modified. The argument in question is `--watch`. That is very pleasant and helpful but with a simple docker setup where we copy the needed files upon build time inside the container, anything that we change on the host after the container is started is not going to be updated to the container layer that we wrote the data to, consequently rendering Jekyll's regeneration feature rather useless.
 
 <br/>
 
@@ -60,19 +55,19 @@ Let us assume that we already have our nice little blog dockerized and in order 
 
 <br/>
 
-This is easily solvable by mounting a volume from the root level of the project to the running container and Jekyll will be able to detect the changes, but we will soon find out that the all the files that where created by the dockerized Jekyll app on the host system will be owned by the root user or any other user rather that the one that we are logged into our system with.  This is standard behavior in the case we have not specified the `USER` instruction and it makes matters very inconvenient by having to `chown` the files back to our current system user.
+This is easily solvable by mounting a volume from the root level of the project to the running container and Jekyll will be able to detect the changes done from the host, but we will soon find out that all the files that where created by the dockerized Jekyll app on the host system will be owned by the root user or any other user rather that the one that we are logged into our system with.  This is normal behavior but it makes matters very inconvenient by having to `chown` the files back to our current system user.
 
 <br/>
 Note:
 
-The solution that I am about to explain can be used for other web applications too. If we want our changes to be conveyed to the running application inside the container immediately, we should have a similar implementation.
+The solution that I am about to explain can be used for other web applications too. If we want our changes to be conveyed to the running application inside the container immediately and with the proper UID and GID set, we should have a similar implementation.
 
 <br/>
 ### Solution
-It is apparent that we would need to somehow sync the the correct UID and GID between the host and the container, otherwise we would need to change the ownership manually with the command `chown`.
-In order to do so we need to do some extra work. I am usually running and building docker with docker-compose which in this case will help in leveraging the final result.
+It is apparent that we would need to somehow sync the the correct UID and GID between the host and the container, otherwise we would need to manually change the ownership back to our system user with the `chown` command.
+In order to do so some extra work needs to be done. I am usually running and building docker with docker-compose which will help in leveraging the final result.
 
-Firstly we need to somehow tell docker of our current user's UID and GID and since docker-compose will be doing all the hard work we need to inject said UID and GID from it. It turns out that with [docker-compose.yml] you can specify environment variables which will be passed to the container as build arguments.
+Firstly we need to somehow tell the container about our current UID and GID and since docker-compose will be controlling the lifecycle of the container we need to inject said UID and GID from it. It turns out that with [docker-compose.yml] you can read environment variables which will be passed to the container as arguments (can be used with environment variables as well).
 
 <br/>
 ```yaml
@@ -82,7 +77,7 @@ args:
 ```
 <br/>
 
-Before doing this we need to set the environment variables by sourcing the following bash script [docker_env] (it should be created if it is not present).
+Before running the container with docker-compose we need to set the environment variables by sourcing the following bash script [docker_env].
 
 <br/>
 
@@ -93,7 +88,7 @@ export GID="$(id -g)"
 
 <br/>
 
-And as a last step, the current directory will be mounted to the working directory inside the container at run time, thus eliminating a layer in the Dockerfile where we copy the code inside the container.
+And finally, the current directory will be mounted to the working directory inside the container at run time, thus eliminating a layer in the Dockerfile where we copy the code on build time.
 
 <br/>
 ```yaml
@@ -110,7 +105,7 @@ source docker_env && docker-compose up --build
 ```
 <br/>
 
-If everyhing went fine we should see something similar appear on stdoud.
+If everything went fine we should see something similar appear on stdoud.
 
 <br/>
 
@@ -129,10 +124,11 @@ blog_1  |   Server running... press ctrl-c to stop.
 ```
 
 <br/>
-This means that the application is running locally and if we open [http://localhost:5000] we will see the Jekyll site.
+This means that the application is running locally and if we open [http://localhost:5000] we will see our Jekyll blog.
 
+<br/>
 Some of you might have noticed that I have not created a user inside the container for the application. I have just instructed the container to use my system UID and GID (which are both 1000). This is because I have found that docker has no problems running any application with a UID and GID that do not exist inside the container.
-We can see this by running the image used in this repository and looking at the users on it, which shows us that a user with UID and GID 1000 is not present.
+We can see this by running the image used in this blog post. Looking at the users on the container, it clearly shows that a user with UID and GID 1000 is not present.
 
 <br/>
 
@@ -175,10 +171,12 @@ nobody:x:65534:65534:nobody:/:/sbin/nologin
 
 ### Conclusion
 
-With the solution outlined above we are effectively heightening our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus now we have our application running as a non root user which is one of the simplest and and straightforward security practices for docker.
+With the solution outlined above we have successfully implemented the host persistence pattern. We have also heightened our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus we have our application running as a non root user which is one of the simplest and and straightforward security practices for docker.
+
+All the configuration files that are mentioned above can be found here [https://github.com/parabolic/parabolic.github.io].
 
 <br/>
-That is all for now. If you find this blog post helpful or if you think it can be improved in anyway, I would kindly ask you to provide your feedback and comments! Also please do not forget to share this blog post if you like it!
+That is all for now. If you find this blog post helpful or if you think it can be improved in anyway, I would kindly ask you to provide your feedback and comments! Also please do not forget to share it if you like it!
 
 <br/>
 

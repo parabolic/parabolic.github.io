@@ -27,10 +27,10 @@ The following excerpt is taken from the docker documentation:
 > By default all files created inside a container are stored on a writable container layer.
 
 <br/>
-But what does this actually mean? Taking into account that the docker layers reside on the host system under /var/lib/docker/{storage-driver-name}, where storage-driver-name can be any of the supported [storage drivers] for docker, it actually means that all the data that gets copied or written inside the container will not persist. At least not in the way we expect it to. Furthermore, the fact that it is stored somewhere on the host system makes it even harder to manage or migrate.
-This behavior somewhat explains why we should not run applications that have a state on a production environment on docker unless we absolutely know what we are doing. But that does not stop us in doing so on a testing environment, let's say like a local dev setup.
+But what does this actually mean? Taking into account that the docker layers reside on the host system under /var/lib/docker/{storage-driver-name}, where storage-driver-name can be any of the supported [storage drivers] for docker, it means that all the data that gets copied or written inside the container will not persist. At least not in the way we expect it to. Furthermore, the fact that it is stored somewhere on the host system makes it even harder to manage or migrate.
+This behavior somewhat explains why we should not run applications that have a state on a production environment in docker unless we absolutely know what we are doing. But that does not stop us in doing so on a testing environment, let's say like a local dev setup.
 
-Read on to see how I have implement this pattern this in docker.
+Read on to see how I have implemented this pattern in docker.
 
 <br/>
 **Question time!**
@@ -65,7 +65,7 @@ The solution that I am about to explain can be used for other web applications t
 <br/>
 ### Solution
 It is apparent that we would need to somehow sync the the correct UID and GID between the host and the container, otherwise we would need to manually change the ownership back to our system user with the `chown` command.
-In order to do so some extra work needs to be done. I am usually running and building docker with docker-compose which will help in leveraging the final result.
+In order to do so, some extra work needs to be done. I am usually running and building docker with docker-compose which will help in leveraging the final result.
 
 Firstly we need to somehow tell the container about our current UID and GID and since docker-compose will be controlling the lifecycle of the container we need to inject said UID and GID from it. It turns out that with [docker-compose.yml] you can read environment variables which will be passed to the container as arguments (can be used with environment variables as well).
 
@@ -127,8 +127,8 @@ blog_1  |   Server running... press ctrl-c to stop.
 This means that the application is running locally and if we open [http://localhost:5000] we will see our Jekyll blog.
 
 <br/>
-Some of you might have noticed that I have not created a user inside the container for the application. I have just instructed the container to use my system UID and GID (which are both 1000). This is because I have found that docker has no problems running any application with a UID and GID that do not exist inside the container.
-We can see this by running the image used in this blog post. Looking at the users on the container, it clearly shows that a user with UID and GID 1000 is not present.
+Some of you might have noticed that I have not created a dedicated user inside the container. I have just instructed the container to use my system UID and GID (which are both 1000). This is because I have found that docker has no problems running any application with a UID and GID that do not exist inside it.
+We can see this by running the docker image used in this blog post. Looking at the users on the container, it clearly shows that a user with UID and GID 1000 is not present.
 
 <br/>
 

@@ -4,6 +4,7 @@ email: nvelkovski@gmail.com
 description: > # this means to ignore newlines until "twitter_username:"
   Having fun in the cloud.
 
+markdown: kramdown
 # social links
 twitter_username: kikolanikola
 github_username:  parabolic
@@ -13,22 +14,6 @@ rss: rss
 # flickr_username: jekyll
 # instagram_username: jekyll
 linkedin_username: nikola-velkovski-231ba824
-# pinterest_username: jekyll
-# youtube_username: jekyll
-# youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
-# youtube_channel_name: CloudCannon
-# telegram_username: jekyll
-# googleplus_username: +jekyll
-# microdotblog_username: jekyll
-
-# Mastodon instances
-# mastodon:
-# - username: jekyll
-#   instance: example.com
-# - username: jekyll2
-#   instance: example.com
-
-
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # Minima date format

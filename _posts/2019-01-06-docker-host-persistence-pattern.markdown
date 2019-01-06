@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Docker host persistence pattern
-permalink: /posts/
+permalink: Docker host persistence pattern
 tags: docker volumes pattern
 ---
 

@@ -6,7 +6,6 @@ LABEL maintainer.name="Nikola Velkovski"
 
 ARG UID
 ARG GID
-ARG USERNAME
 
 ENV APP_HOME="/app"
 

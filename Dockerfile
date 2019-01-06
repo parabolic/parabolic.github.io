@@ -18,5 +18,5 @@ COPY Gemfile* ./
 
 RUN bundle install -j "$(getconf _NPROCESSORS_ONLN)"
 
-# Run as the user specified from docker-compose.
+# Run as the user with the UID and GID from the arguments.
 USER ${UID}:${GID}

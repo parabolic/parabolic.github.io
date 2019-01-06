@@ -2,10 +2,10 @@
 
 <p align="center">
   <a href="https://jekyllrb.com/">
-    <img src="./jekyll_logo.png" alt="Jekyll Logo" style="width:400px;height:200px;" align="middle">
+    <img src="./jekyll_logo.png" alt="Jekyll Logo" style="width:200px;height:100px;" align="middle">
   </a>
   <a href="https://www.docker.com/">
-    <img src="./docker_logo.png" alt="Docker Logo" style="width:600px;height:400px;" align="middle">
+    <img src="./docker_logo.png" alt="Docker Logo" style="width:400px;height:300px;" align="middle">
   </a>
 </p>
 

@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Docker host persistence pattern
-permalink: Docker host persistence pattern
-tags: docker volumes pattern
+title: Docker host data persistence pattern
+permalink: Docker host data persistence pattern
+tags: docker volumes pattern data layers container jekyll docker-compose
 ---
 
 ---
@@ -17,7 +17,7 @@ tags: docker volumes pattern
 
 ### Containers and data persistence
 
-In this blog post we will be exploring the possibilities to manage, persist and share data between a host and a container by utilizing a simple pattern dubbed "host based persistence".
+In this blog post we will be exploring the possibilities to manage, persist and share data between a host and a container by utilizing a simple pattern dubbed "host based data persistence".
 
 Before I start diving into technicalities I reckon it is better to clarify a few things so that readers from all levels are on par with what I will be explaining.
 
@@ -201,7 +201,7 @@ nobody:x:65534:65534:nobody:/:/sbin/nologin
 
 ### Conclusion
 
-With the solution outlined above we have successfully implemented the host persistence pattern. We have also heightened our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus we have our application running as a non root user which is one of the simplest and and straightforward security practices for docker.
+With the solution outlined above we have successfully implemented the host data persistence pattern. We have also heightened our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus we have our application running as a non root user which is one of the simplest and and straightforward security practices for docker.
 
 All the configuration files that are mentioned above can be found here [https://github.com/parabolic/parabolic.github.io].
 

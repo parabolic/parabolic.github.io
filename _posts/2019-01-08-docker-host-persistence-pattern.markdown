@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Docker host data persistence pattern
-permalink: Docker host data persistence pattern
-tags: docker volumes pattern data layers container jekyll docker-compose
-published: false
+title: Docker persistence for local development
+permalink: Docker-persistence-for-local-development
+tags: docker volumes pattern data layers container jekyll docker-compose local-development development
+redirect_from: "/Docker host data persistence pattern/"
 ---
 
 ---

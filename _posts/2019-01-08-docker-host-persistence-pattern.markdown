@@ -29,7 +29,7 @@ The following excerpt is taken from the docker documentation:
 
 <br/>
 But what does this actually mean? Taking into account that the docker layers reside on the host system under /var/lib/docker/{storage-driver-name}, where storage-driver-name can be any of the supported [storage drivers] for docker, it means that all the data that gets copied or written inside the container will not persist. At least not in the way we expect it to. Furthermore, the fact that it is stored somewhere on the host system makes it even harder to manage or migrate.
-This behavior somewhat explains why we should not run applications that have a state on a production environment in docker unless we absolutely know what we are doing. But that does not stop us in doing so on a testing environment, let's say like a local dev setup.
+This behavior somewhat explains why we should not run applications that have a state on a production environment in docker unless we absolutely know what we are doing. But that does not stop us from doing so on a testing environment, let's say like a local dev setup.
 
 Read on to see how I have implemented this pattern in docker.
 
@@ -44,9 +44,9 @@ Read on to see how I have implemented this pattern in docker.
 <br/>
 
 ### Obstacle
-As you might have noticed by now this blog platform runs with Jekyll on GitHub. Because Jekyll is a gem and behaves like an ordinary ruby application it is the perfect candidate for running it in a container. I will not bore you with all the details, but if I have piqued your interest you can have a look at the repository for the complete setup [https://github.com/parabolic/parabolic.github.io].
+As you might have noticed by now this blog platform runs with Jekyll on GitHub. Because Jekyll is a gem and behaves like an ordinary ruby application it is the perfect candidate for running in a container. I will not bore you with all the details, but if I have piqued your interest you can have a look at the repository for the complete setup [https://github.com/parabolic/parabolic.github.io].
 
-Let us assume that we already have our nice little blog dockerized and in order to see how it looks like, we need to have a look at it before sending it on it's merry journey to the GitHub cloud. Jekyll has a nice feature that regenerates the site when files are modified. The argument in question is `--watch`. That is very pleasant and helpful but with a simple docker setup where we copy the needed files upon build time inside the container, anything that we change on the host after the container is started is not going to be updated to the container layer that we wrote the data to, consequently rendering Jekyll's regeneration feature rather useless.
+Let us assume that we already have our nice little blog dockerized and in order to see how it looks like, we need to have a look at it before sending it on its merry journey to the GitHub cloud. Jekyll has a nice feature that regenerates the site when files are modified. The argument in question is `--watch`. That is very pleasant and helpful but with a simple docker setup where we copy the needed files upon build time inside the container, anything that we change on the host after the container is started is not going to be updated to the container layer that we wrote the data to, consequently rendering Jekyll's regeneration feature rather useless.
 
 <br/>
 
@@ -56,7 +56,7 @@ Let us assume that we already have our nice little blog dockerized and in order 
 
 <br/>
 
-This is easily solvable by mounting a volume from the root level of the project to the running container and Jekyll will be able to detect the changes done from the host, but we will soon find out that all the files that where created by the dockerized Jekyll app on the host system will be owned by the root user or any other user rather that the one that we are logged into our system with.  This is normal behavior but it makes matters very inconvenient by having to `chown` the files back to our current system user.
+This is easily solvable by mounting a volume from the root level of the project to the running container and Jekyll will be able to detect the changes done from the host, but we will soon find out that all the files that were created by the dockerized Jekyll app on the host system will be owned by the root user or any other user rather that the one that we are logged into our system with.  This is normal behavior but it makes matters very inconvenient by having to `chown` the files back to our current system user.
 
 <br/>
 Note:
@@ -65,7 +65,7 @@ The solution that I am about to explain can be used for other web applications t
 
 <br/>
 ### Solution
-It is apparent that we would need to somehow sync the the correct UID and GID between the host and the container, otherwise we would need to manually change the ownership back to our system user with the `chown` command.
+It is apparent that we would need to somehow sync the correct UID and GID between the host and the container, otherwise we would need to manually change the ownership back to our system user with the `chown` command.
 In order to do so, some extra work needs to be done. I am usually running and building docker with docker-compose which will help in leveraging the final result.
 
 Firstly we need to somehow tell the container about our current UID and GID and since docker-compose will be controlling the lifecycle of the container we need to inject said UID and GID from it. It turns out that with [docker-compose.yml] you can read environment variables which will be passed to the container as arguments (can be used with environment variables as well).
@@ -202,7 +202,7 @@ nobody:x:65534:65534:nobody:/:/sbin/nologin
 
 ### Conclusion
 
-With the solution outlined above we have successfully implemented the host data persistence pattern. We have also heightened our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus we have our application running as a non root user which is one of the simplest and and straightforward security practices for docker.
+With the solution outlined above we have successfully implemented the host data persistence pattern. We have also heightened our security, solely because the user hasn't been created in the first place and therefore it has no home directory, no shell or anything else that might get copied from /etc/skel, that is if we do not take extra precaution whilst creating it. As an added bonus we have our application running as a non root user which is one of the simplest and straightforward security practices for docker.
 
 All the configuration files that are mentioned above can be found here [https://github.com/parabolic/parabolic.github.io].
 

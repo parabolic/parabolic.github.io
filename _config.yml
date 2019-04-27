@@ -1,10 +1,9 @@
 title: cloudlad.io
 author: Nikola Velkovski
-email: nvelkovski@gmail.com
+email: nikola@cloudlad.io
 description: > # this means to ignore newlines until "twitter_username:"
   Having fun in the cloud.
 
-markdown: kramdown
 # social links
 twitter_username: kikolanikola
 github_username:  parabolic
@@ -14,7 +13,12 @@ rss: rss
 # flickr_username: jekyll
 # instagram_username: jekyll
 linkedin_username: nikola-velkovski-231ba824
+
 show_excerpts: false # set to true to show excerpts on the homepage
+
+google_analytics: UA-137373669-1
+
+markdown: kramdown
 
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this

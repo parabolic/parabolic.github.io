@@ -1,4 +1,5 @@
 ---
+excerpt: By default all files created inside a container are stored on a writable container layer.
 layout: page
 title: Docker persistence for local development
 permalink: Docker-persistence-for-local-development

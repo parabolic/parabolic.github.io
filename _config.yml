@@ -14,7 +14,7 @@ rss: rss
 # instagram_username: jekyll
 linkedin_username: nikola-velkovski-231ba824
 
-show_excerpts: false # set to true to show excerpts on the homepage
+show_excerpts: true
 
 google_analytics: UA-137373669-1
 

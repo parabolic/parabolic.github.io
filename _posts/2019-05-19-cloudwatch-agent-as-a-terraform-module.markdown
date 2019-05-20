@@ -55,7 +55,7 @@ Aside from that modules are reusable, versionable, testable, and callable from w
 
 Terraform supports various [source types] for getting the source code of the modules.
 
-```hcl
+```sh
 module "cloudwatch_agent" {
   source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.2.0"
 
@@ -121,9 +121,9 @@ At the very end, the command for starting the daemon references a specific confi
 
 Switching between the metrics granularity is done by passing the `metrics_config` parameter when invoking the module:
 
-```hcl
+```sh
 module "cloudwatch_agent" {
-  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.1.1"
+  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.2.0"
 
   name      = "cloudwatch_agent"
   namespace = "eg"
@@ -135,7 +135,7 @@ module "cloudwatch_agent" {
 
 Inside the main.tf within the module the `metrics_config` parameter will be used to either load the standard or the advanced configuration file with terraform conditionals.
 
-```hcl
+```sh
 data "template_file" "cloud_init_cloudwatch_agent" {
   template = "${file("${path.module}/templates/cloud_init.yaml")}"
 
@@ -149,9 +149,9 @@ For the EC2 instance to be able to send any metrics to CloudWatch we need to set
 
 Here's an example with using the role:
 
-```hcl
+```sh
 module "cloudwatch_agent" {
-  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.1.1"
+  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.2.0"
 
   name      = "cloudwatch_agent"
   namespace = "eg"
@@ -167,9 +167,9 @@ resource "aws_iam_instance_profile" "cloudwatch_agent" {
 ```
 Or using the JSON policy:
 
-```hcl
+```sh
 module "cloudwatch_agent" {
-  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.1.1"
+  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.2.0"
 
   name      = "cloudwatch_agent"
   namespace = "eg"
@@ -186,9 +186,9 @@ resource "aws_iam_role_policy" "cloudwatch_agent" {
 
 This will get our CloudWatch agent up and running on our EC2 instance. For the observant eye, there is a serious flaw with cloud-init in the current setup. What will happen if we already have set cloud-init configuration? We should somehow make it work with the cloud-init configuration from the module. For this reason, the Mime Multi Part Archive capability from cloud-init was created which in terraform is a data source called `template_cloudinit_config`. Even though this looks a bit intricate it is taken care of by the module. The only change that needs to be done is adding the attribute `userdata_part_content` when calling the module, meaning that we are going to pass our cloud-init configuration and in return, we will get a `Mime Multi Part Archive` cloud-init which can be used in the `launch_configuration`:
 
-```hcl
+```sh
 module "cloudwatch_agent" {
-  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.1.1"
+  source = "git::https://github.com/cloudposse/terraform-aws-cloudwatch-agent?ref=0.2.0"
 
   name      = "cloudwatch_agent"
   namespace = "eg"

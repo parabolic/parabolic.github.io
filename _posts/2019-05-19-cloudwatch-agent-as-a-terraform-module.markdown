@@ -75,7 +75,7 @@ module "cloudwatch_agent" {
 
 <br/>
 <p align="center">
-  <img alt="mime_multipart_cloud_init" title="Mime Multipart Archive" src="/assets/images/2019_05_19_terraform.svg" align="middle">
+  <img alt="mime_multipart_cloud_init" title="Mime Multipart Archive" src="/assets/images/2019_05_19_terraform.png" align="middle">
 </p>
 <br/>
 The CloudWatch terraform module currently supports collecting metrics and can only be applied on AWS/EC2, however if you have an awesome idea for an improvement or are in need an additional feature, you can either make a contribution or open an issue or here: [https://github.com/cloudposse/terraform-aws-cloudwatch-agent/]

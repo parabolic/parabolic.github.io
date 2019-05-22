@@ -184,7 +184,7 @@ resource "aws_iam_role_policy" "cloudwatch_agent" {
 }
 ```
 
-This will get our CloudWatch agent up and running on our EC2 instance. For the observant eye, there is a serious flaw with cloud-init in the current setup. What will happen if we already have set cloud-init configuration? We should somehow make it work with the cloud-init configuration from the module. For this reason, the Mime Multi Part Archive capability from cloud-init was created which in terraform is a data source called `template_cloudinit_config`. The module takes care of the intricate Mime Multipart Archive. The only change that needs to be done is adding the attribute `userdata_part_content` when calling the module, meaning that we are going to pass our cloud-init configuration and in return, we will get a `Mime Multi Part Archive` cloud-init which can be used in the `launch_configuration`:
+This will get our CloudWatch agent up and running on our EC2 instance. For the observant eye, there is a serious flaw with cloud-init in the current setup. What will happen if we have already an existing cloud-init configuration? We should somehow make it work with the cloud-init configuration from the module. For this reason, the **Mime Multi Part Archive** capability from cloud-init was created which in terraform is a data source called `template_cloudinit_config`. The module takes care of the intricate Mime Multi Part Archive. The only change that needs to be done is adding the attribute `userdata_part_content` when calling the module, meaning that we are going to pass our cloud-init configuration and in return, we will get a `Mime Multi Part Archive` cloud-init which can be used in the `launch_configuration`:
 
 ```sh
 module "cloudwatch_agent" {

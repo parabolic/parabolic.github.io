@@ -117,7 +117,7 @@ runcmd:
   - /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/etc/cloudwatch_agent.json -s
 ```
 
-At the very end, the command for starting the daemon references a specific configuration file `file:/etc/cloudwatch_agent.json`. It defines which sets of metrics and detail levels will be monitored from the OS. The AWS CloudWatc Agent has three levels of granularity detail, Basic, Standard, and Advanced. For convenience and simplicity, I have decided to use a pre-generated configuration file which has only the Standard and Advanced detail levels. I have [generated the configuration file with using the Wizard].
+At the very end, the command for starting the daemon references a specific configuration file `file:/etc/cloudwatch_agent.json`. It defines which sets of metrics and detail levels will be monitored from the OS. The AWS CloudWatch Agent has three levels of granularity detail, Basic, Standard, and Advanced. For convenience and simplicity, I have decided to use a pre-generated configuration file which has only the Standard and Advanced detail levels. I have [generated the configuration file with using the Wizard].
 
 Switching between the metrics granularity is done by passing the `metrics_config` parameter when invoking the module:
 

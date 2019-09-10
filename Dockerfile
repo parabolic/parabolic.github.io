@@ -1,4 +1,4 @@
-FROM ruby:2.5.3-alpine3.8
+FROM ruby:2.6.3-alpine
 
 LABEL maintainer.url="https://github.com/parabolic"
 LABEL description="A dockerized jekyll that regenerates the site on file change."

@@ -131,7 +131,7 @@ I will be using [terraform workspaces] with which I can conveniently use single 
 By creating a local variable `local.region` I have implemented a simple check that detects whether the workspace is default one, which will subsequently stop terraform plan/apply. Setting a bogus region will render this check useless but plan/apply will fail nevertheless.
 
 
-```hcl
+```
 locals {
   region = terraform.workspace == "default" ? "!!!Please set the terraform workspace to a valid region!!!" : terraform.workspace
 }
@@ -139,7 +139,7 @@ locals {
 <br/>
 
 Then in turn I am using the local variable `local.region` in the aws provider configuration.
-```hcl
+```
 provider "aws" {
   version = "~> 2.27.0"
 
@@ -185,7 +185,7 @@ With terraform workspaces we are using the same set of templates without duplica
 
 And one more thing before applying the terraform configuration, please make sure you have replaced the following local variables so that they represent your local setup:
 
-```hcl
+```
 locals {
   profile     = "testbed"
   allowed_ips = ["0.0.0.0/0"]
@@ -296,7 +296,7 @@ VPC
 
 For the creation of the VPC, I have settled on using the offical terraform module [https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.12.0].
 
-```hcl
+```
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.12.0"
@@ -327,7 +327,7 @@ The real challenge was how to set the tags in a nonrepetitive and useful manner.
 
 The following example only works with terraform 0.12 and above.
 
-```hcl
+```
 module "label_owned" {
   source    = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.15.0"
   stage     = local.stage
@@ -351,7 +351,7 @@ ConfigMap
 The ConfigMap that we are applying with kubectl is a local variable (see `locals.tf`) that has the parameter `rolearn:` computed and interpolated, the rest is written in a standard yaml syntax. It is shown on stdout with terraform outputs (see `outputs.tf`).
 
 {% raw %}
-```hcl
+```
 locals {
   config_map_aws_auth = <<CONFIGMAPAWSAUTH
 apiVersion: v1

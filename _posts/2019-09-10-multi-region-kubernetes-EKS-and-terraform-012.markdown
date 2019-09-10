@@ -2,7 +2,7 @@
 excerpt: Any technology you adopt today is a technology you're going to have to troubleshoot tomorrow.
 layout: page
 title: Multi-Region Kubernetes - EKS and Terraform 0.12
-permalink: multi-region-kubernetes--EKS-and-terraform-012
+permalink: multi-region-kubernetes-EKS-and-terraform-012
 tags: kubernetes k8s terraform 0.12 AWS EKS multi-region IaC infrastructure-as-code
 ---
 <br/>

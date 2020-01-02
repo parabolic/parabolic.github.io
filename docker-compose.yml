@@ -12,6 +12,6 @@ services:
     environment:
       - JEKYLL_ENV=docker
 
-    command: jekyll serve --host 0.0.0.0 --port 5000 --watch
+    command: jekyll serve --host 0.0.0.0 --port 5000 --watch --incremental --trace
     ports:
       - 5000:5000

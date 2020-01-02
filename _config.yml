@@ -2,7 +2,7 @@ title: cloudlad.io
 author: Nikola Velkovski
 email: nikola@cloudlad.io
 description: > # this means to ignore newlines until "twitter_username:"
-  Having fun in the cloud.
+  A technologist, having fun in the cloud.
 
 # social links
 twitter_username: kikolanikola
@@ -19,7 +19,7 @@ show_excerpts: true
 google_analytics: UA-137373669-1
 
 markdown: kramdown
-
+highlighter: rouge
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:

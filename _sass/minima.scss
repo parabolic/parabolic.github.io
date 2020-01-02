@@ -2,13 +2,13 @@
 
 // Define defaults for each variable.
 
-$base-font-family: "Source Sans Pro", Roboto, Helvetica, Arial, sans-serif, !default;
-$base-font-size:   20px !default;
+$base-font-family: Montserrat, "IBM Plex Sans", Ubuntu, Helvetica, Arial, Calibri, Futura !default;
+$base-font-size:   22px !default;
 $base-font-weight: 450 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.8 !default;
+$base-line-height: 2.1 !default;
 
-$spacing-unit:     10px !default;
+$spacing-unit:     50px !default;
 
 $text-color:       #111 !default;
 $background-color: #fdfdfd !default;
@@ -25,7 +25,7 @@ $orange-color:     #f66a0a !default;
 $table-text-align: left !default;
 
 // Width of the content area
-$content-width:    1200px !default;
+$content-width:    1000px !default;
 
 $on-palm:          600px !default;
 $on-laptop:        800px !default;
@@ -33,13 +33,7 @@ $on-laptop:        800px !default;
 $on-medium:        $on-palm !default;
 $on-large:         $on-laptop !default;
 
-// Use media queries like this:
-// @include media-query($on-palm) {
-//   .wrapper {
-//     padding-right: $spacing-unit / 2;
-//     padding-left: $spacing-unit / 2;
-//   }
-// }
+
 // Notice the following mixin uses max-width, in a deprecated, desktop-first
 // approach, whereas media queries used elsewhere now use min-width.
 @mixin media-query($device) {

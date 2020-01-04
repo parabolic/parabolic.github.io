@@ -1,14 +1,20 @@
 @charset "utf-8";
 
+@font-face {
+    font-family: "Montserrat-Regular";
+    src: url("/assets/fonts/Montserrat-Regular.ttf");
+}
+
 // Define defaults for each variable.
 
-$base-font-family: Ubuntu, Montserrat, Garamond, Palatino, Calibri !default;
+$base-font-family: Montserrat-Regular, Ubuntu, Garamond, Palatino, Calibri, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",!default;
+
 $base-font-size:   22px !default;
 $base-font-weight: 450 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 2.1 !default;
+$base-line-height: 2.5 !default;
 
-$spacing-unit:     50px !default;
+$spacing-unit:     40px !default;
 
 $text-color:       #111 !default;
 $background-color: #fdfdfd !default;

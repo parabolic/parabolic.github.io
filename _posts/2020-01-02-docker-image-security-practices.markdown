@@ -19,7 +19,7 @@ published: true
 
 <br/>
 
-### [The state of cyber security today](#the-state-of-cyber-security-today)
+### **The state of cyber security today**
 
 Security usually means inconvenience, inconvenience brings hindrance, how do we move fast yet stay as secure as possible in this technological present. There's no universal answer for this subject, but what we should always do at least strive, is to adhere to certain standards and principles which will reduce the risk in the unlikely case of a breach of security. Applying best security practices would be our most dependable remedy against malicious actors of any kind. As an example let's take today's container technologies, namely the most popular one, docker. They are fast, lightweight and immutable, but come with a tradeoff. The border that isolates the host and the container is very thin, alas thinner than the conventional bulky and slow Virtual Machines. The tradeoff, in this case, is very clear, we've gained enhanced utilization of resources but because the container technology shares a lot of components with the host system if we do not employ well-defined security precautions we will be putting the host system along with the other containers running on it at risk. If we can employ as many security safeguards as we can, rest assured that running a container would be more secure than the traditional Virtual Machine.
 
@@ -53,7 +53,7 @@ func main() {
 }
 ```
 
-### [Do not use the root user at container runtime](#do-not-use-the-root-user-at-container-runtime)
+### **Do not use the root user at container runtime**
 
 This is not at all hard to elaborate, since ages even with traditional computing, running services as root was and still is exceptionally bad. Security has improved vastly since, and container technologies offer isolation through kernel namespaces, in which processes running on the container are unbeknownst from processes running on the host system. Kernel namespaces have been around since July 2008, meaning that they've had quite a few improvements and iterations, but nothing justifies running the application as the root user.
 
@@ -71,7 +71,9 @@ Imagine we are running a container as the root user, and unfortunately, the appl
 
 If we have a container that needs to persist a state on a mounted volume, in the case of a breach all the files can be deleted from the container because there are no constraints for a user with UID and GID 0.
 
-#### *Remediation - Specify a dedicated user in Docker*
+#### ***Remediation***
+
+#### *Specify a dedicated user in Docker*
 
 We should create and have a dedicated user that will run the application during container runtime:
 
@@ -130,7 +132,7 @@ PID   USER     TIME  COMMAND
 
 The `$ ps` output clearly shows that the simple golang web server is running as a non-root user that we have previosly created and specified.
 
-### [Be vary when mounting the docker socket](#be-vary-when-mounting-the-docker-socket)
+### **Be vary when mounting the docker socket**
 
 Many examples on the internet casually mention that the docker socket should be mounted inside the container in particular installation instructions, which I find very alarming considering this is the main entry point for the docker API. The container that has access to the docker socket `/var/run/docker.sock` can control all the running containers on the host and as an added bonus the host is most probably compromised because the Docker daemon runs as root by default.
 
@@ -142,11 +144,11 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/images/json | jq
 
 This will give us all the images that are present on the host where the docker daemon is running currently.
 
-### [Do not run containers with full container capabilities also known as the privileged flag](#do-not-run-containers-with-full-container-capabilities-also-known-as-the-privileged-flag)
+### **Do not run containers with full container capabilities also known as the privileged flag**
 
 Running a container with the `--privileged` flag gives all capabilities to it plus it lifts all the limitations enforced by the cgroup controller. E.g. the container can now read the host's `/dev` and `/proc` folder. It has "super capabilities" that will allow it to control the host's devices, processes and kernel parameters. In combination with the processes running as the root user, the damage can be disastrous.
 
-### [Do not pass secrets into arguments or enviroment variables during build time](#do-not-pass-secrets-into-arguments-or-enviroment-variables-during-build-time)
+### **Do not pass secrets into arguments or enviroment variables during build time**
 
 There is a common misconception/anti-pattern regarding the `ARG` parameter within Dockerfiles, at least I have made the grave mistake thinking that passing a secret with the `ARG` parameter won't be persisted to the final image. The Docker documentation somewhat implies that when using arguments they will be present only for build time 
 
@@ -214,11 +216,13 @@ a09dbe8447f7        3 days ago          /bin/sh -c #(nop)  ARG WORKDIR=/go/src/a
 ```
 
 
-#### *[Remediation - Buildkit, Multi Stage Builds](#remediation---buildkit-multi-stage-builds)*
+#### ***Remediation***
+
+#### *Buildkit, Multi Stage Builds*
 
 There are multiple methods on how can we remove secrets from the docker image during the build. I will only describe the ones that I have trialed and have been using for a while in a production-ready setup.
 
-**Buildkit.**
+**Buildkit**
 
 This is the latest iteration of the docker build process. According to docker, it is the "[much-needed overhaul of the build architecture]". I prefer this method the most because it truly is an enhacement over the traditional docker build.
 
@@ -244,7 +248,7 @@ $ DOCKER_BUILDKIT=1 docker build --no-cache --progress=plain --secret id=very_se
 
 Buildkit offers many other improvements which are out of the scope for now, head on to [https://docs.docker.com/develop/develop-images/build_enhancements/] to learn more.
 
-**Multi Stage Builds.**
+**Multi Stage Builds**
 
 Each instruction in the Dockerfile adds a layer to the image, and all of the artifacts, arguments and environment variables are present in the final image along with the aforementioned layers. With multi-stage build, we can selectively copy artifacts and erase everything else including sensitive data. This way we can have final images that are small, secure and do not contain any delicate information.
 
@@ -291,20 +295,20 @@ dbe76a8816f2        21 minutes ago      /bin/sh -c #(nop) WORKDIR /app          
 <missing>           2 months ago        /bin/sh -c #(nop) ADD file:fe1f09249227e2da2…   5.55MB
 ```
 
-#### [Image vulnerability scanner](#image-vulnerability-scanner)
+#### **Image vulnerability scanner**
 
 It is always a good practice to check the container that is running the app for any known vulnerabilities. At present, the major cloud providers provide this ability out of the box. An image vulnerability scanner works by scanning the container images in a docker repository and reports on any found and known vulnerabilities. This can be incorporated in a CI/CD pipeline with ease. One such tool is [clair].
 
-#### [Slim or container optimized images](#slim-or-container-optimized-images)
+#### **Slim or container optimized images**
 
 Small container images contain fewer packages, fewer packages means reduced attack surface. The current and most excellent container distribution is without a doubt [Alpine Linux]. Most of the ready to use docker images currently offer an alpine Linux variation.
 
 
-#### [Use official container images only](#use-official-container-images-only)
+#### **Use official container images only**
 
 Needless to say, if the image we intend to use is provided by a third-party we do not have any way to know what might be installed on it, coupled with a mounted filesystem or [docker socket](#be-vary-when-mounting-the-docker-socket) the potential for harm ascends.
 
-#### Conclusion
+#### **Conclusion**
 There's no all-in-one solution for being secure, what it takes is persistence, discipline, and above all cybersecurity culture!
 
 If you enjoyed this blog post, or you found it helpful I'd be very grateful if you'd help by sharing it.

@@ -146,11 +146,11 @@ This will give us all the images that are present on the host where the docker d
 
 ### **Do not run containers with full container capabilities also known as the privileged flag**
 
-Running a container with the `--privileged` flag gives all capabilities to it plus it lifts all the limitations enforced by the cgroup controller. E.g. the container can now read the host's `/dev` and `/proc` folder. It has "super capabilities" that will allow it to control the host's devices, processes and kernel parameters. In combination with the processes running as the root user, the damage can be disastrous.
+Running a container with the `--privileged` flag gives all capabilities to it plus it lifts all the limitations enforced by the cgroup controller. E.g. the container can now read the host's `/dev` and `/proc` folder. It has "super capabilities" that will allow it to control the host's devices, processes and kernel parameters. In combination with the container process running as root, the damage can be disastrous.
 
 ### **Do not pass secrets into arguments or enviroment variables during build time**
 
-There is a common misconception/anti-pattern regarding the `ARG` parameter within Dockerfiles, at least I have made the grave mistake thinking that passing a secret with the `ARG` parameter won't be persisted to the final image. The Docker documentation somewhat implies that when using arguments they will be present only for build time 
+There is a common misconception/anti-pattern regarding the `ARG` parameter within Dockerfiles, at least I have made the grave mistake thinking that passing a secret with the `ARG` parameter won't be persisted to the final image. The Docker documentation somewhat implies that when using arguments they will be present only during build time.
 
 The following excerpt is taken from [https://docs.docker.com/engine/reference/commandline/build/]
 

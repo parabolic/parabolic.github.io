@@ -8,10 +8,6 @@ description: > # this means to ignore newlines until "twitter_username:"
 twitter_username: kikolanikola
 github_username:  parabolic
 rss: rss
-# dribbble_username: jekyll
-# facebook_username: jekyll
-# flickr_username: jekyll
-# instagram_username: jekyll
 linkedin_username: nikola-velkovski-231ba824
 
 show_excerpts: true
@@ -19,6 +15,10 @@ show_excerpts: true
 google_analytics: UA-137373669-1
 
 markdown: kramdown
+
+kramdown:
+  input: GFM
+
 highlighter: rouge
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this

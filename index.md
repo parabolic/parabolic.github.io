@@ -1,5 +1,0 @@
----
-layout: home
-author_profile: true
-tags: docker aws containers AmazonWebServices terraform kubernetes EKS
----

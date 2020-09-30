@@ -117,15 +117,16 @@
   }
 }
 
-
-
 /**
  * Site footer
  */
 .site-footer {
+  // font-size: 12px;
   color: $footer-text-color;
   border-top: 3px solid $footer-border-color;
-  padding: $spacing-unit 0;
+  padding: $spacing-unit / 2 0;
+  padding-bottom: 0;
+  padding-top: $spacing-unit / 2;
   background-color: $footer-background-color;
 }
 
@@ -141,7 +142,7 @@
 }
 
 .footer-col-wrapper {
-  @include relative-font-size(0.9375);
+  @include relative-font-size(0.6);
   color: $grey-color;
   margin-left: -$spacing-unit / 2;
   @extend %clearfix;

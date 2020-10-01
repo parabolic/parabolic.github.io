@@ -27,7 +27,7 @@ This blog post is going to be about how I practically apply [Terraform's 0.13] f
 
 Having worked with both AWS and GCP, I have found that as usual, there are pros and cons to both cloud providers.
 
-One slightly simpler thing (perhaps better) than the other cloud providers is the coupling between G Suite and GCP. G Suite is acts as a central identity store that we can use in GCP’s Cloud Identity and Access Management (IAM). The coupling between the users in a company and its IaaS provider simplifies the management overhead. As an example, one can use G Suite emails or email groups to assign permissions to resources within GCP. This leads to interesting combinations that clearly define responsibilities, and we benefit from heightened security because of said segregation of roles and duties.
+One slightly simpler thing (perhaps better) than the other cloud providers is the coupling between G Suite and GCP. G Suite acts as a central identity store that we can use in GCP’s Cloud Identity and Access Management (IAM). The coupling between the users in a company and its IaaS provider simplifies the management overhead. As an example, one can use G Suite emails or email groups to assign permissions to resources within GCP. This leads to interesting combinations that clearly define responsibilities, and we benefit from heightened security because of said segregation of roles and duties.
 
 Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables the operator to control and fine-tune ownership, access control, and inheritance. An organization is the root node of the hierarchy. Then come the [folders] and the projects. See Figure 1.
 

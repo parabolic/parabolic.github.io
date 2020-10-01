@@ -144,9 +144,9 @@ This was checked by the validation rule at
 ```
 
 <br>
-Terraform's feature list does not stop here. There are many others, but I decided to write only about the most notable ones. for a full list of features and fixes head on to [Terraform's release changelog].
+Terraform's feature list does not stop here. There are many others, but I decided to write only about the most notable ones. For a full list of features and fixes head on to [Terraform's release changelog].
 
-I hope that this blog post helped you in understanding how can a basic hierarchical setup in Google Cloud can be achieved with Terraform. Please share this post if you find it interesting and helpful.
+I hope that this blog post helped you in understanding how a basic hierarchical setup in Google Cloud can be achieved with Terraform. Please share this post if you find it interesting and helpful.
 
 The example module that I am using in this blog post can be [found here].
 

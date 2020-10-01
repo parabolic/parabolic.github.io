@@ -38,7 +38,7 @@ Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables 
 Figure 1: Cloud Platform Resource Hierarchy
 </p>
 
-Let us assume the following case. There is a big organization with many engineering teams that need isolated testing environments. The security team that needs to supervise the teams and their respective resources needs to have a project to deploy their tools. This is to provide support in the unlikely case of security issues that might arise.
+Let us assume the following case. There is a big organization with many engineering teams that need isolated testing environments. The security team that needs to supervise the teams and their respective resources needs to have a project to deploy its tools. This is to provide support in the unlikely case of security issues that might arise.
 
 A Folder can have many other folders and projects below it. Besides, access to the resources within the projects can be limited by Folder so that an IAM email (user, group, or a service account) can have a set of permissions for the Cloud resources living within a Folder. With some planning, the hierarchical structure of an organization can be fascinating.
 

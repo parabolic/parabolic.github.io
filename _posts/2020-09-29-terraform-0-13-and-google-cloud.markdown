@@ -19,17 +19,17 @@ published: true
 
 ## **Terraform**
 
-Terraform, the de facto configuration tool for managing infrastructure nowadays has come a long way since its early release, roughly 5 years ago. After many iterations, mostly driven by the vocal supporters, one of terarrorm’s biggest strengths, listening to its community has proven judgmental to its success.
+Terraform, the de facto configuration tool for managing infrastructure nowadays has come a long way since its early release, roughly 5 years ago. After many iterations, mostly driven by vocal supporters, one of Terraform’s biggest strengths, listening to its community has proven crucial to its success.
 
-This blog post, is going to be about how I practically apply [Terraform's 0.13] features into one of the major IaaS providers [Google Cloud].
+This blog post is going to be about how I practically apply [Terraform's 0.13] features into one of the major IaaS providers [Google Cloud].
 
 ## **The Scenario**
 
 Having worked with both AWS and GCP, I have found that as usual, there are pros and cons to both cloud providers.
 
-One slightly simpler thing (perhaps better) than the other cloud providers is the coupling between G Suite and GCP. G Suite is acting as a central identity store that we can use in GCP’s Cloud Identity and Access Management (IAM). The coupling between the users in a company and its IaaS provider simplifies the management overhead. As an example, one can use G Suite emails or email groups to assign permissions to resources within GCP. This leads to interesting combinations that clearly define the responsibilities, and we benefit from heightened security because of said segregation of roles and duties.
+One slightly simpler thing (perhaps better) than the other cloud providers is the coupling between G Suite and GCP. G Suite is acts as a central identity store that we can use in GCP’s Cloud Identity and Access Management (IAM). The coupling between the users in a company and its IaaS provider simplifies the management overhead. As an example, one can use G Suite emails or email groups to assign permissions to resources within GCP. This leads to interesting combinations that clearly define responsibilities, and we benefit from heightened security because of said segregation of roles and duties.
 
-Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables the operator to control and fine-grain ownership, access control, and inheritance. An organization is the root node of the hierarchy. Then come the [folders] and the projects. See Figure 1.
+Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables the operator to control and fine-tune ownership, access control, and inheritance. An organization is the root node of the hierarchy. Then come the [folders] and the projects. See Figure 1.
 
 <p align="center">
   <img alt="gcp_org_folders_projects" title="Gcp Org Folders Projects" src="assets/images/2020_09_29_gcp_org_folders_projects.png" height="600px" style="border:0.5px solid grey">
@@ -38,7 +38,7 @@ Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables 
 Figure 1: Cloud Platform Resource Hierarchy
 </p>
 
-Let us assume the following case. There is a big organization with many engineering teams that need isolated testing environments. The security team that needs to supervise the teams and their respective resources need to have a project to deploy their tools. This is to provide support in the unlikely case of security issues that might arise.
+Let us assume the following case. There is a big organization with many engineering teams that need isolated testing environments. The security team that needs to supervise the teams and their respective resources needs to have a project to deploy their tools. This is to provide support in the unlikely case of security issues that might arise.
 
 A Folder can have many other folders and projects below it. Besides, access to the resources within the projects can be limited by Folder so that an IAM email (user, group, or a service account) can have a set of permissions for the Cloud resources living within a Folder. With some planning, the hierarchical structure of an organization can be fascinating.
 
@@ -71,7 +71,7 @@ We can set a [local map variable] in the root module that defines the creation o
 </p>
 
 <br>
-This terrafom configuration will create three folders and four projects. See Figure 4.
+This Terraform configuration will create three folders and four projects. See Figure 4.
 
 <p align="center">
   <a>
@@ -85,13 +85,13 @@ This terrafom configuration will create three folders and four projects. See Fig
 
 ### **depends_on** For Modules
 
-Provisioning APIs is a sophisticated business. Sometimes the APIs do not behave as we expect them to, or often they lack features. Managing resources in the cloud add up to the complexity plus sometimes we require working with the resources in a specific order. The **depends_on** meta-argument in addresses the issue.
+Provisioning APIs is a sophisticated business. Sometimes the APIs do not behave as we expect them to, or often they lack features. Managing resources in the cloud adds to the complexity plus sometimes we require working with the resources in a specific order. The **depends_on** meta-argument addresses the issue.
 
-There are two types of resource dependencies in Terraform, implicit or explicit. Implicit dependencies are handled by Terraform automatically. It analyses expressions within configuration blocks for references to other resources. As an example, a VM instance will implicitly dependent on the resource defined in the network_interface setting, because it requires an IP Adress to operate.
+There are two types of resource dependencies in Terraform, implicit or explicit. Implicit dependencies are handled by Terraform automatically. It analyses expressions within configuration blocks for references to other resources. As an example, a VM instance will implicitly depend on the resource defined in the network_interface setting, because it requires an IP Address to operate.
 
 Sometimes, though, Terraform cannot resolve some dependencies on its own. In such a case, we explicitly set them with the **depends_on** meta-argument.
 
-***depends_on** was originally available for resources only, from version 0.13, onwards it is available for modules as well.*
+***depends_on** was originally available for resources only, from version 0.13 onwards it is available for modules as well.*
 
 Let us suppose that the security team in our organization wants to have an overview of all the resources that are present along with their activity. For that, a separate GCP project would suffice. The only requirement for this project is that it needs to be created before the others (and configure its tooling accordingly). From Terraform’s perspective, all the other projects depend on this project, which I dubbed “Team-X”. See Figure 5.
 

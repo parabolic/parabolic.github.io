@@ -2,8 +2,8 @@
 excerpt: If you’re going to do operations reliably, you need to make it reproducible and programmatic
 layout: page
 title: Terraform 0.13 and Google Cloud
-permalink: terraform-0-13-and-google-gloud
-tags: Terraform 0.13Gcloud google cloud GCP IaaS Infrastructure infrastructure-as-code code
+permalink: terraform-0-13-and-google-cloud
+tags: Terraform 0.13 Gcloud google cloud GCP IaaS Infrastructure infrastructure-as-code code
 published: true
 ---
 <p align="center">

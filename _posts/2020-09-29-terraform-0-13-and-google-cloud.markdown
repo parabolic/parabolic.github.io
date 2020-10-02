@@ -34,7 +34,7 @@ One slightly simpler thing (perhaps better) than the other cloud providers is th
 Google Cloud has a concept of [Cloud Platform Resource Hierarchy]. This enables the operator to control and fine-tune ownership, access control, and inheritance. An organization is the root node of the hierarchy. Then come the [folders] and the projects. See Figure 1.
 
 <p align="center">
-  <img alt="gcp_org_folders_projects" title="Gcp Org Folders Projects" src="assets/images/2020_09_29_gcp_org_folders_projects.png" height="600px" style="border:0.5px solid grey">
+  <img alt="gcp_org_folders_projects" title="Gcp Org Folders Projects" src="assets/images/2020_09_29_gcp_org_folders_projects.png" style="border:0.5px solid grey" align="middle"/>
 </p>
 <p align="center">
 Figure 1: Cloud Platform Resource Hierarchy
@@ -47,7 +47,7 @@ A Folder can have many other folders and projects below it. Besides, access to t
 For simplicity's sake, I will limit the example with only a subset of the resources. See Figure 2.
 
 <p align="center">
-  <img alt="gcp_org_folders_projects_subset" title="Gcp Org Folders Projects subset" src="assets/images/2020_09_29_gcp_org_folders_projects_subset.png" height="600px" style="border:0.5px solid grey">
+  <img alt="gcp_org_folders_projects_subset" title="Gcp Org Folders Projects subset" src="assets/images/2020_09_29_gcp_org_folders_projects_subset.png" style="border:0.5px solid grey" align="middle" />
 </p>
   <p align="center">
   Figure 2: Subset of resources
@@ -65,7 +65,7 @@ We can set a [local map variable] in the root module that defines the creation o
 
 <p align="center">
   <a href="https://github.com/parabolic/examples/blob/master/terraform/0.13/main.tf#L1-L47">
-    <img alt="local map variable" title="Local Map Variable" src="assets/images/2020_09_29_gcp_org_local_map_variable.png" height="900px" style="border:0.5px solid grey">
+    <img alt="local map variable" title="Local Map Variable" src="assets/images/2020_09_29_gcp_org_local_map_variable.png" height="800px" style="border:0.5px solid grey" align="middle"/>
   </a>
   <p align="center">
   Figure 3: Local Map Variable
@@ -77,7 +77,7 @@ This Terraform configuration will create three folders and four projects. See Fi
 
 <p align="center">
   <a>
-    <img alt="folders_projects" title="Folders Projects" src="assets/images/2020_09_29_gcp_org_folders_projects_console.png" height="200px" style="border:0.5px solid grey">
+    <img alt="folders_projects" title="Folders Projects" src="assets/images/2020_09_29_gcp_org_folders_projects_console.png" height="200px" style="border:0.5px solid grey" align="middle"/>
   </a>
   <p align="center">
   Figure 4: Folders, projects in GCP console
@@ -99,7 +99,7 @@ Let us suppose that the security team in our organization wants to have an overv
 
 <p align="center">
   <a href="https://github.com/parabolic/examples/blob/master/terraform/0.13/main.tf#L37-L70">
-    <img alt="data structures" title="Data Structures" src="assets/images/2020_09_29_explicit_dependencies.png" width="410px" style="border:0.5px solid grey">
+    <img alt="data structures" title="Data Structures" src="assets/images/2020_09_29_explicit_dependencies.png" height="600px" width="auto" style="border:0.5px solid grey" allign="middle" />
   </a>
   <p align="center">
   Figure 5: Explicit module dependency

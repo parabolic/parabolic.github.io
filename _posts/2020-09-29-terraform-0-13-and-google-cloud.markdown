@@ -114,7 +114,7 @@ The variable block supports an additional validation configuration that has a co
 
 In the example below, I am validating the required input variable **billing_account**. Google Cloud's billing accounts have the form of six alphanumeric characters, separated by a dash sign.
 
-```hcl
+```terraform
 variable "billing_account" {
   description = ""
   type        = string
@@ -130,7 +130,7 @@ The validation above checks for a valid Google Cloud billing account and fails i
 
 Example with an invalid billing account.
 
-```hcl
+```bash
 $ terraform apply
 
 Error: Invalid value for variable

@@ -7,13 +7,15 @@ description: > # this means to ignore newlines until "twitter_username:"
   Terraform Assosiate / 
   Hashicorp ambassador (2020)
 
-# social links
-twitter_username: kikolanikola
-github_username:  parabolic
-rss: rss
-linkedin_username: nikola-velkovski-231ba824
-
 show_excerpts: true
+
+minima:
+  date_format: "%b %-d, %Y"
+  skin: solarized-dark
+  social_links:
+    github:  parabolic
+    rss: rss
+    linkedin: nikola-velkovski-231ba824
 
 google_analytics: UA-137373669-1
 
@@ -21,12 +23,6 @@ markdown: kramdown
 
 kramdown:
   input: GFM
-
-highlighter: rouge
-# Minima date format
-# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
-minima:
-  date_format: "%b %-d, %Y"
 
 # Pagination
 paginate: 3
@@ -36,11 +32,11 @@ paginate_path: /page:num/
 theme: minima
 
 plugins:
- - jekyll-feed
- - jekyll-paginate
- - jekyll-redirect-from
- - jekyll-seo-tag
- - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 exclude:
   - CNAME

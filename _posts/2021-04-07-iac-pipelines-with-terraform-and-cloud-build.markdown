@@ -268,7 +268,7 @@ Evaluating Cloud Build was a fun task and like every solution out there, it has 
   <b style="font-size:0.7vw" >Figure 9. Cloud Build Execution times.</b>
 </p>
 <br/>
-That is all for now. For any suggestions or questions, feel free to contact me. If you like what I am doing, do not forget to share.
+That is all for now. For any suggestions or questions, feel free to contact me. If you like what I am doing, don't forget to share this blog post.
 
 
 [Cloud Build]: https://cloud.google.com/build

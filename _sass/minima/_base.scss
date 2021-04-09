@@ -1,3 +1,7 @@
+html {
+  font-size: $base-font-size;
+}
+
 /**
  * Reset some basic elements
  */
@@ -27,6 +31,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  overflow-wrap: break-word;
 }
 
 
@@ -41,7 +46,10 @@ ul, ol, dl, figure,
   margin-bottom: $spacing-unit / 2;
 }
 
-
+hr {
+  margin-top: $spacing-unit;
+  margin-bottom: $spacing-unit;
+}
 
 /**
  * `main` element
@@ -79,7 +87,7 @@ figcaption {
  * Lists
  */
 ul, ol {
-  margin-left: 50px;
+  margin-left: $spacing-unit;
 }
 
 li {
@@ -104,15 +112,15 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: $brand-color;
+  color: $link-base-color;
   text-decoration: none;
 
   &:visited {
-    color: darken($brand-color, 15%);
+    color: $link-visited-color;
   }
 
   &:hover {
-    color: $text-color;
+    color: $link-hover-color;
     text-decoration: underline;
   }
 
@@ -130,16 +138,18 @@ a {
  * Blockquotes
  */
 blockquote {
-  color: $grey-color;
-  border-left: 4px solid $grey-color-light;
+  color: $brand-color;
+  border-left: 4px solid $border-color-01;
   padding-left: $spacing-unit / 2;
   @include relative-font-size(1.125);
-  letter-spacing: -1px;
   font-style: italic;
-  margin-left: 20px;
 
   > :last-child {
     margin-bottom: 0;
+  }
+
+  i, em {
+    font-style: normal;
   }
 }
 
@@ -150,9 +160,11 @@ blockquote {
  */
 pre,
 code {
-  @include relative-font-size(0.7375);
-  border: 1px solid $grey-color-light;
+  font-family: $code-font-family;
+  font-size: 0.9375em;
+  border: 1px solid $border-color-01;
   border-radius: 3px;
+  background-color: $code-background-color;
 }
 
 code {
@@ -170,14 +182,23 @@ pre {
   }
 }
 
+.highlight {
+  border-radius: 3px;
+  background: $code-background-color;
+  @extend %vertical-rhythm;
+
+  .highlighter-rouge & {
+    background: $code-background-color;
+  }
+}
+
 
 
 /**
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
-  max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+  max-width: calc(#{$content-width} - (#{$spacing-unit}));
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit / 2;
@@ -185,8 +206,7 @@ pre {
   @extend %clearfix;
 
   @media screen and (min-width: $on-large) {
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-    max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+    max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
   }
@@ -210,11 +230,11 @@ pre {
  */
 
 .orange {
-  color: $orange-color;
+  color: #f66a0a;
 }
 
 .grey {
-  color: $grey-color;
+  color: #828282;
 }
 
 .svg-icon {
@@ -234,23 +254,29 @@ table {
   margin-bottom: $spacing-unit;
   width: 100%;
   text-align: $table-text-align;
-  color: lighten($text-color, 18%);
+  color: $table-text-color;
   border-collapse: collapse;
-  border: 1px solid $grey-color-light;
+  border: 1px solid $table-border-color;
   tr {
     &:nth-child(even) {
-      background-color: lighten($grey-color-light, 6%);
+      background-color: $table-zebra-color;
     }
   }
   th, td {
     padding: ($spacing-unit / 3) ($spacing-unit / 2);
   }
   th {
-    background-color: lighten($grey-color-light, 3%);
-    border: 1px solid darken($grey-color-light, 4%);
-    border-bottom-color: darken($grey-color-light, 12%);
+    background-color: $table-header-bg-color;
+    border: 1px solid $table-header-border;
   }
   td {
-    border: 1px solid $grey-color-light;
+    border: 1px solid $table-border-color;
+  }
+
+  @include media-query($on-laptop) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
   }
 }

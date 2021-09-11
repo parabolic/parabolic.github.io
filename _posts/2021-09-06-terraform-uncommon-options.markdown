@@ -260,7 +260,8 @@ Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 As expected, Terraform reverts back to the state as instructed by the configuration in the `main.tf.` template.
 
 ## [JSON Instead Of HCL]
-The dse case for this capability is quite interesting. I can programmatically generate Terraform templates using the JSON syntax. The only requirement is for the filename to have the extension `tf.json` otherwise, Terraform will not pick the configuration up.
+The use case for this capability is quite interesting. I can programmatically generate Terraform templates using the JSON syntax. The only requirement is for the filename to have the extension `tf.json`. Otherwise, Terraform will not pick the configuration up.
+
 I can convert the example above to JSON like so:
 
 ```json
@@ -282,7 +283,9 @@ I can convert the example above to JSON like so:
   }
 }
 ```
-I would reckon it’s unusual to generate a JSON encoded file using the JSON syntax. It’s a very appealing feature I imagine is being actively used out there.
+I would reckon it’s unusual to generate a JSON encoded file using the JSON syntax.
+
+It is a very appealing feature I imagine is being actively used out there.
 
 ## [Terraform Graph]
 
@@ -325,7 +328,7 @@ I get a nice image of a graph as seen in Figure 1. (I've also inverted the color
 
 Getting to know a specific technology or a tool is not as easy as it seems. Hopefully, this blog post will make some of the unusual Terraform options clearer and more usable.
 
-If you enjoyed this blog post, please share and spread it. For any suggestions or questions, contact me at nikola@cloudlad.io.
+If you enjoyed this blog post, please share and spread it. For any suggestions or questions, contact me at [nikola@cloudlad.io].
 
 [Terraform Console]: #terraform-console
 [Shell Autocomplete]: #shell-autocomplete
@@ -334,3 +337,4 @@ If you enjoyed this blog post, please share and spread it. For any suggestions o
 [JSON Instead Of HCL]: #json-instead-of-hcL
 [Terraform Graph]: #terraform-graph
 [examples repo]:https://github.com/parabolic/examples/tree/master/terraform/the_less_common_commands_and_options
+[nikola@cloudlad.io]:mailto:nikola@cloudlad.io

@@ -5,7 +5,7 @@ description: > # this means to ignore newlines until "twitter_username:"
   Technologist / 
   Certified Kubernetes Administrator / 
   Terraform Assosiate / 
-  Hashicorp ambassador (2020)
+  Hashicorp ambassador (2020/2021)
 
 show_excerpts: true
 
@@ -15,7 +15,6 @@ minima:
   social_links:
     github:  parabolic
     rss: rss
-    linkedin: nikola-velkovski-231ba824
 
 google_analytics: UA-137373669-1
 

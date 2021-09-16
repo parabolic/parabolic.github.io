@@ -14,7 +14,7 @@ minima:
   skin: solarized-dark
   social_links:
     github:  parabolic
-    rss: rss
+    # rss: rss
 
 google_analytics: UA-137373669-1
 

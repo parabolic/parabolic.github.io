@@ -1,0 +1,41 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+
+        <ul class="contact-list">
+          <li>{{ site.title }}</li>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        </ul>
+
+        <p class="feed-subscribe">
+          <a href="{{ 'feed.xml' | relative_url }}">
+            <svg class="svg-icon grey">
+              <use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use>
+            </svg>
+          </a>
+          <span>RSS</span>
+        </p>
+
+      </div>
+
+      <div class="footer-col footer-col-2">
+         <div class="social-links">
+           {%- include social.html -%}
+         </div>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p class="text">
+            {{ site.description }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+

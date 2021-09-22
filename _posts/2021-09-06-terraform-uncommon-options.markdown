@@ -69,7 +69,7 @@ $ terraform console
 
 EOT
 ```
-Voila! We see how our file will look like if we've used the `yamlencode` function.
+Voilà! We see how our file will look like if we've used the `yamlencode` function.
 
 Why stop there, maybe I just need the value of the `b` key?
 
@@ -257,7 +257,7 @@ local_file.private_key: Creation complete after 0s [id=e7ec4a8f2309bdd4c4c57cb2a
 Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 ```
 
-As expected, Terraform reverts back to the state as instructed by the configuration in the `main.tf.` template.
+As expected, Terraform reverts back to the state as instructed by the configuration in the `main.tf` template.
 
 ## [JSON Instead Of HCL]
 The use case for this capability is quite interesting. I can programmatically generate Terraform templates using the JSON syntax. The only requirement is for the filename to have the extension `tf.json`. Otherwise, Terraform will not pick the configuration up.

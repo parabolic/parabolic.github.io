@@ -40,7 +40,7 @@ Depending on how the private key is generated, it diverges into two types:
 Are managed by Google, and only the public key can be viewed and verified.
 The most common use of such keys is for generating short-lived credentials.
 They are automatically rotated and used for signing and are valid for a maximum of two weeks.
-Services like App Engine and Compute Engine are using Google-managed key pairs.
+Services like App Engine and Compute Engine use Google-managed key pairs.
 They are my preferred method (it should be everyone's default). That is because I do not have to care about managing or storing any private keys which are considered sensitive data.
 
 ###### [User-Managed Key pairs]

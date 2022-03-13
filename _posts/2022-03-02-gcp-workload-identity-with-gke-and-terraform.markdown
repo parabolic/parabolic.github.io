@@ -28,7 +28,7 @@ With a service account, the application can authenticate to other GCP resources 
 
 #### [IAM Roles]
 A service account is usually granted an IAM role that defines the authorization scope for other GCP resources.
-With that said, we can safely assume that a service account deals with the authentication and the IAM role with the authorization.
+With that said, we can safely assume that a service account deals with authentication and the IAM role deals with authorization.
 
 #### [Public-Private Key Pairs]
 Each service account correlates with a public/private RSA key pair.

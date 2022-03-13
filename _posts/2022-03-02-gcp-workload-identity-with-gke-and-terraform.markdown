@@ -24,7 +24,7 @@ In this blog post, I will write about improving one's security posture by runnin
 
 #### [Service Accounts]
 Service accounts are types of accounts typically used by applications or so-called workloads.
-With a service account, the application can authenticate to other GCP resources or APIs. It is an entity defined by GCP and resides in the IAM service. Its email address representation e.g. `sa-name@gcp-project-id.iam.gserviceaccount.com` is unique to a given GCP account.
+With a service account, the application can authenticate to other GCP resources or APIs. It is an entity defined by GCP and resides in the IAM service. Its email address representation, e.g. `sa-name@gcp-project-id.iam.gserviceaccount.com`, is unique to a given GCP account.
 
 #### [IAM Roles]
 A service account usually is granted an IAM role that defines the authorization scope for other GCP resources.

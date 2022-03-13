@@ -18,7 +18,7 @@ published: true
 > "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards." - Gene Spafford
 
 <br/>
-In this blog post, I will write about increasing the security posture. It centers on running Google Kubernetes Engine (GKE) workloads on the Google Cloud Platform (GCP). The focus falls mainly on authentication. That is the section between the Identity and Access Management (IAM) service and the GKE workloads. Foremost, I need to set the stage properly.
+In this blog post, I will write about improving one's security posture by running Google Kubernetes Engine (GKE) workloads on the Google Cloud Platform (GCP). My focus falls mainly on authentication: the section between the Identity and Access Management (IAM) service and the GKE workloads. But first, I need to set the stage.
 
 ## [Service Accounts, IAM Roles, And Key Pairs]
 

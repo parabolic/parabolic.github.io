@@ -2,9 +2,9 @@ title: cloudlad.io
 author: Nikola
 email: nikola@cloudlad.io
 description: > # this means to ignore newlines until "twitter_username:"
-  Technologist / 
-  Certified Kubernetes Administrator / 
-  Terraform Assosiate / 
+  Technologist /
+  Certified Kubernetes Administrator /
+  Terraform Assosiate /
   Hashicorp ambassador (2020/2021)
 
 show_excerpts: true
@@ -14,7 +14,6 @@ minima:
   skin: solarized-dark
   social_links:
     github:  parabolic
-    # rss: rss
 
 google_analytics: UA-137373669-1
 

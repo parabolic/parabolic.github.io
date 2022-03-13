@@ -20,7 +20,7 @@ published: true
 <br/>
 In this blog post, I will write about improving one's security posture by running Google Kubernetes Engine (GKE) workloads on the Google Cloud Platform (GCP). My focus falls mainly on authentication: the section between the Identity and Access Management (IAM) service and the GKE workloads. But first, I need to set the stage.
 
-## [Service Accounts, IAM Roles, And Key Pairs]
+## [Service Accounts, IAM Roles, and Key Pairs]
 
 #### [Service Accounts]
 Service accounts are types of accounts typically used by applications or so-called workloads.

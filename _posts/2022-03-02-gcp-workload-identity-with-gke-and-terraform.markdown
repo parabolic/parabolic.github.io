@@ -148,7 +148,11 @@ What good is theory without the practical part?
 For that, I will be using Terraform and GCP to show the GKE Workload Identity in action.
 
 From this point on, I will assume that the reader has the following:
-[Terraform 1.1 or older] and gcloud CLI installed. Functional GCP credentials (hopefully not configured via a User-managed service account key), authorized for creating and managing GCP projects. Including all of its underlying resources.
+
+- [Terraform 1.1 or older] and gcloud CLI installed. 
+
+- Functional GCP credentials (hopefully not configured via a user-managed service account key), authorized for creating and managing GCP projects, including all of its underlying resources.
+
 
 I've made a [Terraform root module] that creates a:
 - GCP project (it can also reside under an Organization folder).

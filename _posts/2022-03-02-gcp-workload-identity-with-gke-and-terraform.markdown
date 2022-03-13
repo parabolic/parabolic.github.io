@@ -239,7 +239,7 @@ $ kubectl -n cloudlad get serviceaccounts cloudlad -o json
 }
 ```
 <p align="center">
-  <b style="font-size:0.7vw" >Figure 7. Service Account annotation got with kubectl.</b>
+  <b style="font-size:0.7vw" >Figure 7. Service Account annotation with kubectl.</b>
 </p>
 
 You might ask yourself, "OK, What now?". Checking whether the coupling between GCP IAM and GKE works is straightforward. The newly created pod runs indefinite sleep. And the container is started from the official GCP SDK image, meaning the gcloud CLI is readily available.

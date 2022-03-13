@@ -242,7 +242,7 @@ $ kubectl -n cloudlad get serviceaccounts cloudlad -o json
   <b style="font-size:0.7vw" >Figure 7. Service Account annotation with kubectl.</b>
 </p>
 
-You might ask yourself, "OK, What now?". Checking whether the coupling between GCP IAM and GKE works is straightforward. The newly created pod runs indefinite sleep. And the container is started from the official GCP SDK image, meaning the gcloud CLI is readily available.
+You might ask yourself, "OK, what now?" Checking whether the coupling between GCP IAM and GKE works is straightforward. The newly created pod runs indefinite sleep. And the container is started from the official GCP SDK image, meaning the gcloud CLI is readily available.
 
 I will assume a shell in the running container. Then check the available service accounts, and finally, create a PubSub topic. It is all possible because the pod inherits the [roles/pubsub.admin] role. See Figure 8.1.
 

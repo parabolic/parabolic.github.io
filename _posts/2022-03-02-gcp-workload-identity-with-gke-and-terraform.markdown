@@ -174,7 +174,7 @@ See Figure 5.
 For more details about the module and its configuration, refer to the [README.md].
 
 I would have preferred to create all of the resources in one go, but unfortunately, it is not possible with Terraform’s CRUD cycle. The problem is that the K8s provider cannot authenticate against the GKE cluster in one apply run. That makes perfect sense because the GKE cluster is not present in the application stage, and the K8s provider cannot authenticate.
-To programmatically create all of the resources, I utilize the [local_file] provider to generate a helper bash script from a Terraform template. The bash script `k8s.sh` will appear in the working directory of the root module after a successful apply run. It can be [overiden to any valid path] in the Operating System.
+To programmatically create all of the resources, I use the [local_file] provider to generate a helper bash script from a Terraform template. The bash script `k8s.sh` will appear in the working directory of the root module after a successful apply run. It can be [overiden to any valid path] in the Operating System.
 When Terraform apply finishes, the k8s.sh shell script will be present in the working directory. When executed, it will create the cloudlad namespace, a service account, and the annotation for the said service account. Lastly, it will start a pod with the annotated service account attached.
 
 Because of the pod spec override with the annotated service account, the pod itself will inherit the attached role to the [IAM service account] from the Terraform root module. See Figure 6.
@@ -244,7 +244,7 @@ $ kubectl -n cloudlad get serviceaccounts cloudlad -o json
 
 You might ask yourself, "OK, what now?" Checking whether the coupling between GCP IAM and GKE works is straightforward. The newly created pod runs indefinite sleep. And the container is started from the official GCP SDK image, meaning the gcloud CLI is readily available.
 
-I will assume a shell in the running container. Then check the available service accounts, and finally, create a PubSub topic. It is all possible because the pod inherits the [roles/pubsub.admin] role. See Figure 8.1.
+I will execute an interactive shell in the running container. Then check the available service accounts, and finally, create a PubSub topic. It is all possible because the pod inherits the [roles/pubsub.admin] role. See Figure 8.1.
 
 ```sh
 $ kubectl exec --stdin --tty -n cloudlad cloudlad -- bash
